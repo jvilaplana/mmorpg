@@ -132,8 +132,11 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/favicon.ico':                ['permitAll']
 ]
 
+grails.plugin.springsecurity.rest.login.useJsonCredentials = true
+grails.plugin.springsecurity.rest.token.storage.useGorm = true
+grails.plugin.springsecurity.rest.token.storage.gorm.tokenDomainClassName = 'com.jordiv.mmorpg.auth.AuthenticationToken'
+
 grails.plugin.springsecurity.filterChain.chainMap = [
 	'/api/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter',  // Stateless chain
 	'/**': 'JOINED_FILTERS,-restTokenValidationFilter,-restExceptionTranslationFilter'                                                                          // Traditional chain
 ]
-
