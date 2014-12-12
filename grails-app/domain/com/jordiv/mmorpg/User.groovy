@@ -1,5 +1,8 @@
 package com.jordiv.mmorpg
 
+import grails.rest.*
+
+//@Resource(uri='/api/user', formats=['json', 'xml'])
 class User {
 
 	transient springSecurityService

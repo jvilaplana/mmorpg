@@ -1,3 +1,4 @@
+import com.jordiv.mmorpg.Player
 import com.jordiv.mmorpg.Role
 import com.jordiv.mmorpg.User
 import com.jordiv.mmorpg.UserRole
@@ -35,6 +36,8 @@ class BootStrap {
 		User adminUser = new User(username: 'admin', password: 'admin1', accountExpired: false, accountLocked: false, passwordExpired: false).save(flush: true)
 		UserRole.create adminUser, adminRole
 		log.debug "\tAdmin role and user... [OK]"
+		
+		def player = new Player(name: "Anborn", maxHealth: 666, user: adminUser).save(flush: true)
 		
 		log.debug "Generating bootstrap data... [OK]"
 	}
