@@ -69,28 +69,18 @@ class PlayerController {
 			render status: NOT_FOUND
 			return
 		}
-		playerInstance.validate()
-		if (playerInstance.hasErrors()) {
-			render status: NOT_ACCEPTABLE
-			return
-		}
 		Zone pos=playerInstance.getPosition()
 		if(pos.getNorh()!=null){
 			playerInstance.setPosition=pos.getNorth()
 		}else{
 		//TODO Crear una posicio nova
 		}
-		this.update(playerInstance);
+		playerInstance.save flush:true
 	}
 	
 	def moveSouth(Player playerInstance){
 		if (playerInstance==null){
 			render status: NOT_FOUND
-			return
-		}
-		playerInstance.validate()
-		if (playerInstance.hasErrors()) {
-			render status: NOT_ACCEPTABLE
 			return
 		}
 		Zone pos=playerInstance.getPosition()
@@ -99,17 +89,12 @@ class PlayerController {
 		}else{
 		//TODO Crear una posicio nova
 		}
-		this.update(playerInstance);
+		playerInstance.save flush:true
 	}
 	
 	def moveEast(Player playerInstance){
 		if (playerInstance==null){
 			render status: NOT_FOUND
-			return
-		}
-		playerInstance.validate()
-		if (playerInstance.hasErrors()) {
-			render status: NOT_ACCEPTABLE
 			return
 		}
 		Zone pos=playerInstance.getPosition()
@@ -118,17 +103,12 @@ class PlayerController {
 		}else{
 		//TODO Crear una posicio nova
 		}
-		this.update(playerInstance);
+		playerInstance.save flush:true
 	}
 	
 	def moveWest(Player playerInstance){
 		if (playerInstance==null){
 			render status: NOT_FOUND
-			return
-		}
-		playerInstance.validate()
-		if (playerInstance.hasErrors()) {
-			render status: NOT_ACCEPTABLE
 			return
 		}
 		Zone pos=playerInstance.getPosition()
@@ -137,6 +117,6 @@ class PlayerController {
 		}else{
 		//TODO Crear una posicio nova
 		}
-		this.update(playerInstance);
+		playerInstance.save flush:true
 	}
 }

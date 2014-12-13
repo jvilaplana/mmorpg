@@ -61,4 +61,28 @@ class UserController {
         userInstance.delete flush:true
         render status: NO_CONTENT
     }
+	def createPlayer(User userInstance,String playerName){
+		if (userInstance == null) {
+			render status: NOT_FOUND
+			return
+		}
+		Player newp=new Player()
+		newp.setName(playerName)
+		userInstance.addToPlayers(newp)
+		userInstance.save flush:true
+		
+	}
+	
+	def listPlayers(User userInstance){
+		if(userInstance==null){
+			render status: NOT_FOUND
+			return
+		}
+		def playerList=[:]
+		for(Player p:players){
+			playerList[p.getName]=p.getLevel
+		}
+		return playerList
+		
+	}
 }
