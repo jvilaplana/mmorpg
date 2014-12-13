@@ -30,6 +30,7 @@ class PlayerController {
         }
 
         playerInstance.save flush:true
+		playerInstance.setDateCreated(new Date())
         respond playerInstance, [status: CREATED]
     }
 
@@ -47,6 +48,7 @@ class PlayerController {
         }
 
         playerInstance.save flush:true
+		playerInstance.getLastUpdate(new Date())
         respond playerInstance, [status: OK]
     }
 
@@ -61,4 +63,80 @@ class PlayerController {
         playerInstance.delete flush:true
         render status: NO_CONTENT
     }
+	
+	def moveNorth(Player playerInstance){
+		if (playerInstance==null){
+			render status: NOT_FOUND
+			return
+		}
+		playerInstance.validate()
+		if (playerInstance.hasErrors()) {
+			render status: NOT_ACCEPTABLE
+			return
+		}
+		Zone pos=playerInstance.getPosition()
+		if(pos.getNorh()!=null){
+			playerInstance.setPosition=pos.getNorth()
+		}else{
+		//TODO Crear una posicio nova
+		}
+		this.update(playerInstance);
+	}
+	
+	def moveSouth(Player playerInstance){
+		if (playerInstance==null){
+			render status: NOT_FOUND
+			return
+		}
+		playerInstance.validate()
+		if (playerInstance.hasErrors()) {
+			render status: NOT_ACCEPTABLE
+			return
+		}
+		Zone pos=playerInstance.getPosition()
+		if(pos.getSouth()!=null){
+			playerInstance.setPosition=pos.getSouth()
+		}else{
+		//TODO Crear una posicio nova
+		}
+		this.update(playerInstance);
+	}
+	
+	def moveEast(Player playerInstance){
+		if (playerInstance==null){
+			render status: NOT_FOUND
+			return
+		}
+		playerInstance.validate()
+		if (playerInstance.hasErrors()) {
+			render status: NOT_ACCEPTABLE
+			return
+		}
+		Zone pos=playerInstance.getPosition()
+		if(pos.getEast()!=null){
+			playerInstance.setPosition=pos.getEast()
+		}else{
+		//TODO Crear una posicio nova
+		}
+		this.update(playerInstance);
+	}
+	
+	def moveWest(Player playerInstance){
+		if (playerInstance==null){
+			render status: NOT_FOUND
+			return
+		}
+		playerInstance.validate()
+		if (playerInstance.hasErrors()) {
+			render status: NOT_ACCEPTABLE
+			return
+		}
+		Zone pos=playerInstance.getPosition()
+		if(pos.getWest()!=null){
+			playerInstance.setPosition=pos.getWest()
+		}else{
+		//TODO Crear una posicio nova
+		}
+		this.update(playerInstance);
+	}
 }

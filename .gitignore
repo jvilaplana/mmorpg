@@ -33,3 +33,6 @@
 org.eclipse.core.resources.prefs
 .classpath
 .project
+
+#ignore the db config
+grails-app/conf/DataSource.groovy
