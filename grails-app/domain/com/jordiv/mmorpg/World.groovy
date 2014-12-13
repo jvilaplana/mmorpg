@@ -2,7 +2,7 @@ package com.jordiv.mmorpg
 
 class World {
 	
-	static hasmany = [zone: Zone]
+	static hasmany = [layer: Layer]
 	
     static constraints = {
     }

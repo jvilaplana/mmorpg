@@ -5,7 +5,7 @@ dataSource {
     //username = "sa"
 	driverClassName = "com.mysql.jdbc.Driver"
 	username = "root"
-    password = ""
+    password = "eloi5558966"
 }
 hibernate {
     cache.use_second_level_cache = true

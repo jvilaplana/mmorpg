@@ -1,9 +1,17 @@
 package com.jordiv.mmorpg
 
-class Zone {
+abstract class Zone {
 	
-	static belongsTo = [world: World]
+	static belongsTo = [layer: Layer]
+	String type;
+	Zone north
+	Zone south
+	Zone east
+	Zone west
 	
-    static constraints = {
+    static constraints = { north nullable:true
+					 	   south nullable:true
+						   east nullable:true
+						   west nullable:true
     }
 }
