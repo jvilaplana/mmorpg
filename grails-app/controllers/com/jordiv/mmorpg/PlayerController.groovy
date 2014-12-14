@@ -22,7 +22,7 @@ class PlayerController {
             render status: NOT_FOUND
             return
         }
-
+		print("created")
         playerInstance.validate()
         if (playerInstance.hasErrors()) {
             render status: NOT_ACCEPTABLE
@@ -31,6 +31,7 @@ class PlayerController {
 
         playerInstance.save flush:true
 		playerInstance.setDateCreated(new Date())
+		
         respond playerInstance, [status: CREATED]
     }
 

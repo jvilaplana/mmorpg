@@ -61,28 +61,33 @@ class UserController {
         userInstance.delete flush:true
         render status: NO_CONTENT
     }
-	def createPlayer(User userInstance,String playerName){
+	@Transactional
+	def createPlayer(User userInstance){
 		if (userInstance == null) {
 			render status: NOT_FOUND
 			return
 		}
 		Player newp=new Player()
-		newp.setName(playerName)
+		newp.setName("Pagafantes")
 		userInstance.addToPlayers(newp)
-		userInstance.save flush:true
-		
+		print(userInstance.players)
+		respond [:]
 	}
-	
+	@Transactional
 	def listPlayers(User userInstance){
 		if(userInstance==null){
 			render status: NOT_FOUND
 			return
 		}
 		def playerList=[:]
-		for(Player p:players){
-			playerList[p.getName]=p.getLevel
+		if(userInstance.players!=null){
+			for(Player p:userInstance.players){
+				print(p.name)
+				playerList[p.getName]=p.getLevel
+			}	
 		}
-		return playerList
+		print("returning list")
+		respond playerList
 		
 	}
 }
