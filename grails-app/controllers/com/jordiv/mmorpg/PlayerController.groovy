@@ -22,7 +22,6 @@ class PlayerController {
             render status: NOT_FOUND
             return
         }
-		print("created")
         playerInstance.validate()
         if (playerInstance.hasErrors()) {
             render status: NOT_ACCEPTABLE
@@ -64,6 +63,46 @@ class PlayerController {
         playerInstance.delete flush:true
         render status: NO_CONTENT
     }
+	
+	@Transactional
+	def createPlayer(Player playerInstance,User userInstance){
+		if (userInstance == null && playerInstance==null) {
+			render status: NOT_FOUND
+			return
+		}
+		userInstance.validate()
+		if (userInstance.hasErrors()) {
+			render status: NOT_ACCEPTABLE
+			return
+		}
+		playerInstance.validate()
+		if (playerInstance.hasErrors()) {
+			render status: NOT_ACCEPTABLE
+			return
+		}
+		userInstance.addToPlayers(playerInstance)
+		userInstance.save
+		render status: OK
+		return
+	}
+	
+	@Transactional
+	def listPlayers(User userInstance){
+		if(userInstance==null){
+			render status: NOT_FOUND
+			return
+		}
+		def playerList=[:]
+		if(userInstance.players!=null){
+			for(Player p:userInstance.players){
+				print(p.name)
+				playerList[p.getName]=p.getLevel
+			}
+		}
+		print("returning list")
+		respond playerList
+		
+	}
 	
 	def moveNorth(Player playerInstance){
 		if (playerInstance==null){
