@@ -22,6 +22,12 @@ class PlayerController {
             render status: NOT_FOUND
             return
         }
+		
+		if(playerInstance.user.username != principal.username) {
+			render status: UNAUTHORIZED
+			return
+		}
+		
         playerInstance.validate()
         if (playerInstance.hasErrors()) {
             render status: NOT_ACCEPTABLE
@@ -64,27 +70,6 @@ class PlayerController {
         render status: NO_CONTENT
     }
 	
-	@Transactional
-	def createPlayer(Player playerInstance,User userInstance){
-		if (userInstance == null && playerInstance==null) {
-			render status: NOT_FOUND
-			return
-		}
-		userInstance.validate()
-		if (userInstance.hasErrors()) {
-			render status: NOT_ACCEPTABLE
-			return
-		}
-		playerInstance.validate()
-		if (playerInstance.hasErrors()) {
-			render status: NOT_ACCEPTABLE
-			return
-		}
-		userInstance.addToPlayers(playerInstance)
-		userInstance.save
-		render status: OK
-		return
-	}
 	
 	@Transactional
 	def listPlayers(User userInstance){
