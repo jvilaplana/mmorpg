@@ -10,7 +10,7 @@ class Player {
 	Integer damageRecieved=0
 	Integer manaSpent=0
 	Integer level=1
-	
+	Integer vitality=100
 	Integer strength=100
 	Integer stamina=100
 	Integer dexterity=30
@@ -19,7 +19,7 @@ class Player {
 	Integer moveCooldown=10
 	
 	def getMaxHealth(){
-		return strength*level;
+		return vitality*level;
 	}
 	def getCurrentHealt(){
 		return this.maxHealth-DamageRecieved
@@ -30,11 +30,11 @@ class Player {
 	def getCurrentMana(){
 		return this.maxMana-manaSpent
 	}
-	
-	static hasMany = [skills: PlayerSkill]
+
+	//static hasMany = [skills: PlayerSkill]
 	
 	static belongsTo = [user: User]
 	
-    static constraints = {
+    static constraints = { name unique:true
     }
 }
