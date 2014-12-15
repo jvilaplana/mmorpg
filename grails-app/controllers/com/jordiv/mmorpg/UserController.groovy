@@ -35,10 +35,15 @@ class UserController {
 
     @Transactional
     def update(User userInstance) {
-        if (userInstance == null) {
-            render status: NOT_FOUND
-            return
-        }
+		if (userInstance == null) {
+			render status: NOT_FOUND
+			return
+		}
+		
+		if(userInstance.username != principal.username) {
+			render status: UNAUTHORIZED
+			return
+		}
 
         userInstance.validate()
         if (userInstance.hasErrors()) {
@@ -57,6 +62,11 @@ class UserController {
             render status: NOT_FOUND
             return
         }
+		
+		if(userInstance.username != principal.username) {
+			render status: UNAUTHORIZED
+			return
+		}
 
         userInstance.delete flush:true
         render status: NO_CONTENT

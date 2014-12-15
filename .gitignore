@@ -36,3 +36,7 @@ org.eclipse.core.resources.prefs
 
 #ignore the db config
 grails-app/conf/DataSource.groovy
+
+.project
+
+.settings/org.eclipse.core.resources.prefs
